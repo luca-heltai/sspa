@@ -1,14 +1,11 @@
 # An Introduction to Scientific Software Tools & Parallel Algorithms (SSPA)
 
-[![Build Jupyter Book](https://github.com/luca-heltai/sspa/actions/workflows/build-book.yml/badge.svg)](https://github.com/luca-heltai/sspa/actions/workflows/build-book.yml)
-
-```{only} not html
-[View the rendered book on GitHub Pages](https://luca-heltai.github.io/sspa/)
-```
-
-[Course repository on GitHub](https://github.com/luca-heltai/sspa)
-
-**Author:** [Luca Heltai](https://luca-heltai.github-io.com)
+| Item | Link |
+| --- | --- |
+| Jupyter Book Status | [![Jupyter Book Status](https://github.com/luca-heltai/sspa/actions/workflows/build-book.yml/badge.svg)](https://github.com/luca-heltai/sspa/actions/workflows/build-book.yml) |
+| Rendered book | <https://luca-heltai.github.io/sspa/> |
+| Course repository | <https://github.com/luca-heltai/sspa> |
+| Author | [Luca Heltai](https://github.com/luca-heltai) |
 
 Course materials for a 30-hour PhD-level class (10 × 3h sessions) on practical tools for scientific software and introductory parallel algorithms.
 
