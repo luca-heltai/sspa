@@ -1,0 +1,6 @@
+title: "SSPA — Scientific Software Tools & Parallel Algorithms (2025)"
+author: "L. Heltai"
+launch_buttons:
+  notebook_interface: "jupyterlab"
+execute:
+  execute_notebooks: "off"
