@@ -4,3 +4,20 @@ launch_buttons:
   notebook_interface: "jupyterlab"
 execute:
   execute_notebooks: "off"
+
+# Repository and site links (used by sphinx_book_theme)
+repository_url: "https://github.com/luca-heltai/sspa"
+repository_branch: "main"
+use_repository_button: true
+
+site_url: "https://luca-heltai.github.io/sspa/"
+
+html_theme: sphinx_book_theme
+html_theme_options:
+  # show repository link in the top-right
+  repository_url: "https://github.com/luca-heltai/sspa"
+  use_repository_button: true
+  home_page_in_toc: true
+
+extra_footer: |
+  <p>Personal homepage: <a href="https://luca-heltai.github-io.com">luca-heltai.github-io.com</a></p>
