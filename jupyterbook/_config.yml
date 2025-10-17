@@ -5,19 +5,17 @@ launch_buttons:
 execute:
   execute_notebooks: "off"
 
-# Repository and site links (used by sphinx_book_theme)
-repository_url: "https://github.com/luca-heltai/sspa"
-repository_branch: "main"
-use_repository_button: true
+logo: logo.png
+copyright: "2025" # Update copyright year to 2025
+only_build_toc_files: true
 
-site_url: "https://luca-heltai.github.io/sspa/"
+repository:
+  url: https://github.com/luca-heltai/sspa # Online location of your book
+  branch: main # Which branch of the repository should be used when creating links (optional)
 
-html_theme: sphinx_book_theme
-html_theme_options:
-  # show repository link in the top-right
-  repository_url: "https://github.com/luca-heltai/sspa"
+html:
+  use_issues_button: true
   use_repository_button: true
-  home_page_in_toc: true
 
 extra_footer: |
   <p>Personal homepage: <a href="https://luca-heltai.github-io.com">luca-heltai.github-io.com</a></p>

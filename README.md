@@ -2,11 +2,13 @@
 
 [![Build Jupyter Book](https://github.com/luca-heltai/sspa/actions/workflows/build-book.yml/badge.svg)](https://github.com/luca-heltai/sspa/actions/workflows/build-book.yml)
 
+```{only} not html
 [View the rendered book on GitHub Pages](https://luca-heltai.github.io/sspa/)
+```
 
-[Repository on GitHub](https://github.com/luca-heltai/sspa)
+[Course repository on GitHub](https://github.com/luca-heltai/sspa)
 
-[Personal homepage](https://luca-heltai.github-io.com)
+**Author:** [Luca Heltai](https://luca-heltai.github-io.com)
 
 Course materials for a 30-hour PhD-level class (10 × 3h sessions) on practical tools for scientific software and introductory parallel algorithms.
 
