@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  controller:
+    build:
+      context: .
+      dockerfile: slurm-controller.Dockerfile
+    container_name: sspa_slurm_controller
+    hostname: controller
+    networks:
+      - sspa_net
+    volumes:
+      - ./slurm-state:/var/spool/slurm
+    ports:
+      - "6817:6817"
+      - "6818:6818"
+      - "2222:22"
+
+  worker1:
+    build:
+      context: .
+      dockerfile: slurm-worker.Dockerfile
+    container_name: sspa_slurm_worker1
+    networks:
+      - sspa_net
+
+  worker2:
+    build:
+      context: .
+      dockerfile: slurm-worker.Dockerfile
+    container_name: sspa_slurm_worker2
+    networks:
+      - sspa_net
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: jupyter.Dockerfile
+    container_name: sspa_jupyter
+    networks:
+      - sspa_net
+    ports:
+      - "8888:8888"
+
+networks:
+  sspa_net:
+    driver: bridge

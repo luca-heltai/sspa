@@ -6,6 +6,7 @@
 | Rendered book | <https://luca-heltai.github.io/sspa/> |
 | Course repository | <https://github.com/luca-heltai/sspa> |
 | Author | [Luca Heltai](https://github.com/luca-heltai) |
+| Course slides | <https://luca-heltai.github.io/sspa/slides/slideshow.html>|
 
 Course materials for a 30-hour PhD-level class (10 × 3h sessions) on practical tools for scientific software and introductory parallel algorithms.
 
@@ -56,10 +57,8 @@ Content: CC-BY. Code examples: MIT. See `LICENSE` for details.
 Typical layout (some folders may be added later):
 
 - `jupyterbook/` — the course book (index, TOC, lectures)
-- `lectures/` or `jupyterbook/lectures/` — session notes and lab instructions
-- `code/` — example programs used in lectures
+- `jupyterbook/lectures/` and `jupyterbook/slides/` — session notes and slides
+- `codes/` — example programs used in lectures
 - `exercises/` — assignment descriptions and starter files
 - `docker-images/` — Dockerfiles and compose files for the mini-cluster
 - `.github/workflows/` — example CI pipelines used to build/test the material
-
-See `jupyterbook/index.md` for a curated table of contents and links to each lecture page.
