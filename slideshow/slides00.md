@@ -65,7 +65,7 @@ Academic Year: 2025–2026
 # Visual Studio Code
 
 - Lightweight, highly extensible IDE  
-- Install on Ubuntu: `sudo snap install --classic code`  
+- Install on Ubuntu: `sudo snap install --classic code`
 - Or download from <https://code.visualstudio.com/>
 
 ---
@@ -73,14 +73,22 @@ Academic Year: 2025–2026
 # OpenSSH
 
 - Secure remote login to the cluster (and to Docker containers)  
-- Install: `sudo apt install openssh-client openssh-server`
+- Install:
+
+```bash
+sudo apt install openssh-client openssh-server
+```
 
 ---
 
 # Git
 
 - Version control, branch/PR workflow  
-- Install: `sudo apt install git`
+- Install:
+
+````bash
+sudo apt install git
+````
 
 ---
 
@@ -93,16 +101,16 @@ Academic Year: 2025–2026
 **Tip** – Add your user to the `docker` group so you can run containers without `sudo`:  
 
 ```bash
-
 sudo usermod -aG docker $USER
-
 ```
 
 and then log‑out / back‑in.
 
 ----
 
-## Set Up a GitHub Account & SSH‑Key Auth  
+# Set Up a GitHub Account
+
+## Configure SSH‑Key Auth  
 
 **No passwords, just key‑based login**
 
@@ -177,53 +185,53 @@ git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 # Configure git
 
-   1. **Set your user identity**  
+1. **Set your user identity**  
 
-      ```bash
-      git config --global user.name "Your Full Name"
-      git config --global user.email "you@example.com"
-      ```
-
----
-
-   2. **Choose a default editor** (optional)  
-
-      ```bash
-      git config --global core.editor "code --wait"
-      ```
+```bash
+git config --global user.name "Your Full Name"
+git config --global user.email "you@example.com"
+```
 
 ---
 
-   3. **Enable color output**  
+2. **Choose a default editor** (optional)  
 
-      ```bash
-      git config --global color.ui auto
-      ```
-
----
-
-   4. **Show a friendly status prompt**  
-
-      ```bash
-      git config --global status.showUntrackedFiles all
-      ```
+```bash
+git config --global core.editor "code --wait"
+```
 
 ---
 
-   6. **Verify the config**  
+3. **Enable color output**  
 
-      ```bash
-      git config --list --show-origin
-      ```
+```bash
+git config --global color.ui auto
+```
 
 ---
 
-   > **Tip:**  
-   > • Use `git config --global --edit` to manually tweak the `~/.gitconfig`.  
-   > • If you work on multiple accounts, set a local config per repository (`git config user.name …` inside that repo).
+4. **Show a friendly status prompt**  
 
-   -----
-   *With these settings, your Git history will always show the correct author, and the command line will feel a lot friendlier.*
+```bash
+git config --global status.showUntrackedFiles all
+```
+
+---
+
+6. **Verify the config**  
+
+```bash
+git config --list --show-origin
+```
+
+---
+
+> **Tip:**  
+> • Use `git config --global --edit` to manually tweak the `~/.gitconfig`.  
+> • If you work on multiple accounts, set a local config per repository (`git config user.name …` inside that repo).
+
+-----
+*With these settings, your Git history will always show the correct author, and the command line will feel a lot friendlier.*
 
 ----
 
