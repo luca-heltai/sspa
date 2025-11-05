@@ -19,11 +19,10 @@ project:
         - file: lectures/lecture08.md
         - file: lectures/lecture09.md
         - file: lectures/lecture10.md
-    - title: Slides
+    - title: Slides content
       children:
-        # - file: lectures/slides_toc.md
         - file: slides/slides00.md
-        # - file: slides/slides01.md
+        - file: slides/slides01.md
 site:
   options:
     logo: logo.png

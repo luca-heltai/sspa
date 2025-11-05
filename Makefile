@@ -12,7 +12,7 @@ start:
 
 link: 
 	echo Linking slides
-	rm -rf `pwd`/jupyterbook/_build/html/slideshow/
+	rm -rf `pwd`/jupyterbook/_build/html/slideshow
 	ln -s `pwd`/jupyterbook/slides `pwd`/jupyterbook/_build/html/slideshow
 
 copy: 
@@ -20,4 +20,10 @@ copy:
 	rm -f `pwd`/jupyterbook/_build/html/slideshow
 	cp -r `pwd`/jupyterbook/slides `pwd`/jupyterbook/_build/html/slideshow
 
-.PHONY: build clean serve start link copy
+slides:
+	./codes/lab01/generate_slides.sh -v
+
+all: build slides copy
+
+.PHONY: build clean serve start link copy slides all
+
