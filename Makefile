@@ -12,12 +12,12 @@ start:
 
 link: 
 	echo Linking slides
-	rm -f `pwd`/jupyterbook/_build/html/slides/*.{html,md}
-	ln -s `pwd`/jupyterbook/slides/*.{html,md} `pwd`/jupyterbook/_build/html/slides/
+	rm -rf `pwd`/jupyterbook/_build/html/slideshow/
+	ln -s `pwd`/jupyterbook/slides `pwd`/jupyterbook/_build/html/slideshow
 
 copy: 
 	echo Copying slides
-	rm -f `pwd`/jupyterbook/_build/html/slides/*.{html,md}
-	cp -r `pwd`/jupyterbook/slides/*.{html,md} `pwd`/jupyterbook/_build/html/slides/
+	rm -f `pwd`/jupyterbook/_build/html/slideshow
+	cp -r `pwd`/jupyterbook/slides `pwd`/jupyterbook/_build/html/slideshow
 
 .PHONY: build clean serve start link copy

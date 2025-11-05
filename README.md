@@ -6,7 +6,7 @@
 | Rendered book | <https://luca-heltai.github.io/sspa/> |
 | Course repository | <https://github.com/luca-heltai/sspa> |
 | Author | [Luca Heltai](https://github.com/luca-heltai) |
-| Course slides | <https://luca-heltai.github.io/sspa/slides/slideshow.html>|
+| Course slides | <https://luca-heltai.github.io/sspa/slideshow/slideshow.html>|
 
 Course materials for a 30-hour PhD-level class (10 × 3h sessions) on practical tools for scientific software and introductory parallel algorithms.
 

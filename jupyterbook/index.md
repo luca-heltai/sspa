@@ -15,4 +15,4 @@ Below is a quick summary of the course topics collected in this Jupyter Book:
 
 Use the table of contents to navigate the 10 sessions (each ~3h).
 
-<iframe src="https://luca-heltai.github.io/sspa/slides/slideshow.html" width="100%" height="800px" style="border: none;"></iframe>
+<iframe src="https://luca-heltai.github.io/sspa/slideshow/slideshow.html" width="100%" height="800px" style="border: none;"></iframe>

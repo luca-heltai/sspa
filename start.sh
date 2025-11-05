@@ -7,7 +7,7 @@ fi
 if [ ! -d env ]; then 
   python3 -m pip install --user virtualenv
   python3 -m venv env
-  source ./env/bin/activate
+  . ./env/bin/activate
   if [ -f requirements.txt ]; then
     echo "Installing required packages from requirements.txt"
   else
