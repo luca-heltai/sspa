@@ -18,6 +18,7 @@ jobs:
         run: |
           make build
           make copy
+          ls -lah ./jupyterbook/_build/html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

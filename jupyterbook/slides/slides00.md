@@ -8,7 +8,7 @@ Luca Heltai  (<luca.heltai@unipi.it>)
 
 Academic Year: 2025–2026
 
------
+----
 
 ## Why *SSPA*?  
 
@@ -18,7 +18,7 @@ Academic Year: 2025–2026
 - **Reproducible research** – code that runs everywhere.  
 - **Scalable simulations** – get speed‑ups from 1 CPU → 1 k CPUs.  
 
------
+----
 
 ## 5‑Weeks
 
@@ -30,7 +30,7 @@ Academic Year: 2025–2026
 | 4 | Containers & CI | Docker / Apptainer, GitHub Actions |
 | 5 | Parallel algorithms | Amdahl/Gustafson, MPI/OpenMP |
 
------
+----
 
 ## What You’ll Build  
 
@@ -41,7 +41,7 @@ Academic Year: 2025–2026
 | **Robust tests** | pytest / gtest + CI |
 | **Fast code** | Parallel demo, profiling |
 
------
+----
 
 ## Hands‑On Labs  
 
@@ -50,11 +50,11 @@ Academic Year: 2025–2026
 - **Docker build** → run on an HPC node.  
 - **Parallel programming crash course** – 1→8 cores for π Monte‑Carlo.
 
------
+----
 
 # Preliminary steps
 
------
+----
 
 # Tools to install
 
@@ -100,7 +100,7 @@ sudo usermod -aG docker $USER
 
 and then log‑out / back‑in.
 
------
+----
 
 ## Set Up a GitHub Account & SSH‑Key Auth  
 
@@ -173,9 +173,9 @@ git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 ```
 
------
+----
 
-## Configure git
+# Configure git
 
    1. **Set your user identity**  
 
@@ -225,9 +225,18 @@ git config --global url."git@github.com:".insteadOf "https://github.com/"
    -----
    *With these settings, your Git history will always show the correct author, and the command line will feel a lot friendlier.*
 
------
+----
 
-## Next Steps  
+# Check docker installation
+
+```bash
+docker --version
+docker run hello-world
+```
+
+----
+
+# Next Steps  
 
 1. Clone the course repo: `git clone git@github.com:luca-heltai/sspa.git`  
 2. Explore around
