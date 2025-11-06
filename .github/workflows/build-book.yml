@@ -20,7 +20,7 @@ jobs:
       - name: Build HTML Assets
         run: |
           make build
-          ./codes/lab01/generate_slides.sh --base-url ${BASE_URL}
+          ./codes/lab01/generate_slides.sh -v --base-url /sspa/slideshow
           make copy
 
       - name: Deploy to GitHub Pages
