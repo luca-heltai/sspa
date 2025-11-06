@@ -15,4 +15,5 @@ Below is a quick summary of the course topics collected in this Jupyter Book:
 
 Use the table of contents to navigate the 10 sessions (each ~3h).
 
-<iframe src="/slideshow/slides00.html" width="100%" height="800px" style="border: none;"></iframe>
+```{include} lectures/lecture00.md
+```

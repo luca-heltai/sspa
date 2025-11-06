@@ -1,0 +1,11 @@
+<!-- FOOTER START -->
+<iframe src="/slideshow/slides00.html" width="100%" height="800px" style="border: none;"></iframe>
+
+---
+
+```{admonition} 🎬 View Slides
+:class: tip
+
+**[Open slides in full screen](/slideshow/slides00.html)** for the best viewing experience.
+```
+<!-- FOOTER END -->

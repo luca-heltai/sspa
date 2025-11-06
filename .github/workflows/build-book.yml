@@ -19,8 +19,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build HTML Assets
         run: |
-          make build
           ./codes/lab01/generate_slides.sh -v --base-url /sspa
+          make build
           make copy
 
       - name: Deploy to GitHub Pages
