@@ -2,7 +2,24 @@ version: 1
 project:
   title: SSPA — An Introduction to Scientific Software Tools & Parallel Algorithms
   authors:
-    - name: Luca Heltai
+    - id: LH
+      name: Luca Heltai
+      affiliation: unipi
+      email: luca.heltai@unipi.it
+      orcid: 0000-0001-5514-4683
+      github: luca-heltai
+      linkedin: https://www.linkedin.com/in/heltai/
+      youtube: UCK0glvtKYmVPJbpurdlt9pw
+  affiliations:
+    - id: unipi
+      name: University of Pisa
+      ror: https://ror.org/03ad39j10
+      department: Department of Mathematics
+      address: Largo Bruno Pontecorvo 5, 56127 Pisa, Italy
+      city: Pisa
+      country: Italy
+      postal_code: 56127
+      phone: +39 050 221 3824
   copyright: "2025"
   github: luca-heltai/sspa
   toc:
