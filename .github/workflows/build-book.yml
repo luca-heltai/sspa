@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 env:
-  BASE_URL: /sspa/
+  BASE_URL: /sspa
 
 jobs:
   deploy:
@@ -20,8 +20,8 @@ jobs:
       - name: Build HTML Assets
         run: |
           make build
+          ./codes/lab01/generate_slides.sh --base-url ${BASE_URL}
           make copy
-          ls -lah ./jupyterbook/_build/html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
