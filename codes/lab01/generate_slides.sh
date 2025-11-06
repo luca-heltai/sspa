@@ -15,7 +15,7 @@ SLIDES_DIR="jupyterbook/slides"
 LECTURES_DIR="jupyterbook/lectures"
 TEMPLATES_DIR="codes/lab01"
 OUTPUT_DIR="jupyterbook/slides"
-BASE_URL="/slideshow"
+BASE_URL=""
 DRY_RUN=0
 VERBOSE=0
 
@@ -66,10 +66,10 @@ for md in "${slides[@]}"; do
   vlog "Processing $md_base -> $html_out; lecture file: $(basename "$lecture_md")"
 
   # 1) Generate HTML landing page from template, replacing placeholder
-  # Replace both 'slidesXX.md' and a possible 'slideXX.md' typo, just in case.
+  # Replace both 'slidesXX.md' and 'BASEURL' placeholders.
   if [ "$DRY_RUN" -eq 0 ]; then
     sed -e "s/slidesXX\.md/$md_base/g" \
-        -e "s/slideXX\.md/$md_base/g" \
+        -e "s|BASEURL|$BASE_URL|g" \
         "$HTML_TEMPLATE" > "$html_out"
   fi
   vlog "Wrote $html_out"
@@ -83,10 +83,7 @@ for md in "${slides[@]}"; do
   # Build the concrete footer block by substituting XX with the numeric token.
   # This covers both iframe and link occurrences.
   # Use 'printf %s' to preserve newlines exactly.
-  footer_block="$(sed "s/XX/$num/g" "$FOOTER_TEMPLATE")"
-
-  # Prepend the base URL for the iframe source and link.
-  footer_block="$(echo "$footer_block" | sed "s|/slideshow/|$BASE_URL/|g")"
+  footer_block="$(sed -e "s/XX/$num/g" -e "s|BASEURL|$BASE_URL|g" "$FOOTER_TEMPLATE")"
 
   # Check if the lecture already references the correct HTML slide URL.
   # If it does, we assume the footer is present.
