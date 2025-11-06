@@ -26,5 +26,10 @@ project:
 site:
   options:
     logo: logo.png
+    logo_dark: slides/logo_white.png
+    logo_text: ""
+    favicon: logo.png
     folders: true
+    footer_text: ""
+    style: custom.css
   template: book-theme
