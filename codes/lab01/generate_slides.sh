@@ -15,6 +15,7 @@ SLIDES_DIR="jupyterbook/slides"
 LECTURES_DIR="jupyterbook/lectures"
 TEMPLATES_DIR="codes/lab01"
 OUTPUT_DIR="jupyterbook/slides"
+BASE_URL="/slideshow"
 DRY_RUN=0
 VERBOSE=0
 
@@ -28,6 +29,7 @@ while [ $# -gt 0 ]; do
     --lectures-dir)   LECTURES_DIR="$2"; shift 2;;
     --templates-dir)  TEMPLATES_DIR="$2"; shift 2;;
     --output-dir)     OUTPUT_DIR="$2"; shift 2;;
+    --base-url)       BASE_URL="$2"; shift 2;;
     -n|--dry-run)     DRY_RUN=1; shift;;
     -v|--verbose)     VERBOSE=1; shift;;
     -h|--help)
@@ -58,7 +60,7 @@ for md in "${slides[@]}"; do
   md_base="$(basename "$md")"                 # slidesXX.md
   num="${md_base#slides}"                     # XX.md
   num="${num%.md}"                            # XX
-  html_out="$OUTPUT_DIR/slides${num}.html"    # slideshow/slidesXX.html
+  html_out="$OUTPUT_DIR/slides${num}.html"    # slides/slidesXX.html
   lecture_md="$LECTURES_DIR/lecture${num}.md" # jupyterbooks/lectures/lectureXX.md
 
   vlog "Processing $md_base -> $html_out; lecture file: $(basename "$lecture_md")"
@@ -83,20 +85,29 @@ for md in "${slides[@]}"; do
   # Use 'printf %s' to preserve newlines exactly.
   footer_block="$(sed "s/XX/$num/g" "$FOOTER_TEMPLATE")"
 
+  # Prepend the base URL for the iframe source and link.
+  footer_block="$(echo "$footer_block" | sed "s|/slideshow/|$BASE_URL/|g")"
+
   # Check if the lecture already references the correct HTML slide URL.
   # If it does, we assume the footer is present.
   if grep -Fq "slides${num}.html" "$lecture_md"; then
     vlog "Footer already present in $(basename "$lecture_md")"
-  else
-    vlog "Appending footer to $(basename "$lecture_md")"
-    if [ "$DRY_RUN" -eq 0 ]; then
-      # Ensure the file ends with a newline, then append a blank line and the footer.
-      # Also insert a horizontal separator if the file already has content.
-      if [ -s "$lecture_md" ]; then
-        printf '\n' >> "$lecture_md"
-      fi
-      printf '%s\n' "$footer_block" >> "$lecture_md"
+    # Remove any existing footer block to replace it with the updated one.
+    sed -e '/<!-- FOOTER START -->/,/<!-- FOOTER END -->/d' "$lecture_md" > "${lecture_md}.tmp"
+    mv "${lecture_md}.tmp" "$lecture_md"
+    vlog "Removed old footer in $(basename "$lecture_md")"
+  fi
+
+  vlog "Appending footer to $(basename "$lecture_md")"
+  if [ "$DRY_RUN" -eq 0 ]; then
+    # Ensure the file ends with a newline, then append a blank line and the footer.
+    # Also insert a horizontal separator if the file already has content.
+    if [ -s "$lecture_md" ]; then
+      sed '${/^$/d;}' "$lecture_md" > "${lecture_md}.tmp"   # remove last blank line if present
+      mv "${lecture_md}.tmp" "$lecture_md"
+      printf '\n' >> "$lecture_md"
     fi
+    printf '%s\n' "$footer_block" >> "$lecture_md"
   fi
 done
 
