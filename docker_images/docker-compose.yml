@@ -8,8 +8,8 @@ services:
     networks:
       - sspa_net
     volumes:
-      - ./slurm-state:/var/spool/slurm
-      - ./munge:/etc/munge
+      - slurm-state:/var/spool/slurm
+      - munge-key:/etc/munge
       - ./work:/work
       - ./scratch:/scratch
       - ./sspa-home:/home/sspa
@@ -27,7 +27,7 @@ services:
     networks:
       - sspa_net
     volumes:
-      - ./munge:/etc/munge
+      - munge-key:/etc/munge
       - ./work:/work
       - ./scratch:/scratch
       - ./sspa-home:/home/sspa
@@ -41,7 +41,7 @@ services:
     networks:
       - sspa_net
     volumes:
-      - ./munge:/etc/munge
+      - munge-key:/etc/munge
       - ./work:/work
       - ./scratch:/scratch
       - ./sspa-home:/home/sspa
@@ -55,7 +55,19 @@ services:
       - sspa_net
     ports:
       - "8888:8888"
+    command:
+      - jupyter
+      - lab
+      - --ip=0.0.0.0
+      - --no-browser
+      - --port=8888
+      - --NotebookApp.token=
+      - --NotebookApp.password=
+      - --allow-root
 
 networks:
   sspa_net:
     driver: bridge
+volumes:
+  slurm-state:
+  munge-key:

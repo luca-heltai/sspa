@@ -15,6 +15,10 @@ install -d -o slurm -g slurm -m 0755 /var/spool/slurm
 install -d -o slurm -g slurm -m 0755 /var/spool/slurm/state
 install -d -o slurm -g slurm -m 0755 /var/spool/slurmd
 install -d -o slurm -g slurm -m 0755 /var/log/slurm
+touched_files="/var/spool/slurm/node_state /var/spool/slurm/job_state /var/spool/slurm/resv_state /var/spool/slurm/trigger_state"
+for f in $touched_files; do
+  rm -f "$f" "$f.old"
+done
 touch /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
 chown slurm:slurm /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
 chmod 0644 /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
