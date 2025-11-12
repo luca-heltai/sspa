@@ -25,6 +25,12 @@ RUN mkdir -p /etc/munge /var/lib/munge /var/log/munge /etc/slurm-llnl \
     && chown munge:munge /var/log/munge/munged.log \
     && chmod 0640 /var/log/munge/munged.log \
     && chown -R slurm:slurm /etc/slurm-llnl
+RUN mkdir -p /var/log/slurm \
+    && chown slurm:slurm /var/log/slurm \
+    && touch /var/log/slurm/slurm_jobacct.log \
+    && touch /var/log/slurm/accounting \
+    && chown slurm:slurm /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting \
+    && chmod 0644 /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
 
 RUN useradd -m -s /bin/bash sspa || true \
     && echo 'sspa:sspa-password' | chpasswd
@@ -42,6 +48,10 @@ RUN cp /usr/local/etc/slurm.conf.template /etc/slurm-llnl/slurm.conf \
 
 COPY docker-entrypoint-controller.sh /usr/local/bin/docker-entrypoint-controller.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint-controller.sh
+
+RUN usermod -aG sudo sspa \
+    && printf 'sspa ALL=(ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/zz-sspa \
+    && chmod 0440 /etc/sudoers.d/zz-sspa
 
 EXPOSE 6817 6818 22
 

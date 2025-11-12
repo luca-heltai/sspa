@@ -29,6 +29,10 @@ RUN printf 'export WORK=/work\nexport SCRATCH=/scratch\n' > /etc/profile.d/sspa_
 RUN printf 'export SLURM_CONF=/etc/slurm-llnl/slurm.conf\n' > /etc/profile.d/slurm_conf.sh \
     && chmod 0644 /etc/profile.d/slurm_conf.sh
 
+RUN usermod -aG sudo sspa \
+    && printf 'sspa ALL=(ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/zz-sspa \
+    && chmod 0440 /etc/sudoers.d/zz-sspa
+
 COPY slurm.conf /usr/local/etc/slurm.conf.template
 RUN cp /usr/local/etc/slurm.conf.template /etc/slurm-llnl/slurm.conf \
     && chown slurm:slurm /etc/slurm-llnl/slurm.conf \

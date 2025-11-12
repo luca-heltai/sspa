@@ -14,6 +14,10 @@ install -d -o slurm -g slurm -m 0755 /etc/slurm-llnl
 install -d -o slurm -g slurm -m 0755 /var/spool/slurm
 install -d -o slurm -g slurm -m 0755 /var/spool/slurm/state
 install -d -o slurm -g slurm -m 0755 /var/spool/slurmd
+install -d -o slurm -g slurm -m 0755 /var/log/slurm
+touch /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
+chown slurm:slurm /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
+chmod 0644 /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
 for state_file in node_state job_state resv_state trigger_state; do
   touch "/var/spool/slurm/${state_file}"
   chown slurm:slurm "/var/spool/slurm/${state_file}"

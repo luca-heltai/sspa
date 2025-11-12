@@ -259,7 +259,7 @@ python3 codes/lab02/sweep.py --beta "${PARAMS[$SLURM_ARRAY_TASK_ID]}"
 ## Monitoring & debugging checklist
 
 - `squeue -u $USER` → quick look at what is pending/running.
-- `sacct -j <jobid> -o JobID,State,Elapsed,MaxRSS` → verify resource use post-run.
+- `sacct -j <jobid>` (not available in the minimal Docker setup, but expect it on production clusters) → historical state, elapsed time, resource use.
 - `scontrol show node worker1` → inspect node state if jobs stay pending (maybe `drain`).
 - Check Slurm logs inside controller: `/var/log/slurm/slurmctld.log` (via `sudo less`).
 - Container-specific: restart a misbehaving worker with `docker compose restart worker1`.
@@ -280,11 +280,3 @@ python3 codes/lab02/sweep.py --beta "${PARAMS[$SLURM_ARRAY_TASK_ID]}"
 - **Exercise 1 – CPU scaling probe**: add `codes/lab02/vec_add.cpp` + `codes/lab02/run_vec_add.sh`. Compile with `cmake` or `g++`, then write a batch script that sweeps `--ntasks=1,2` using a job array to compare elapsed times (store results in `codes/lab02/results/`).
 - **Exercise 2 – Parameter sweep w/ dependencies**: create `codes/lab02/montecarlo.py` producing intermediate `.npz` files. Submit an array job to vary sample counts, then a dependent `aggregate.sh` that runs once (`--dependency=afterok:$ARRAY_JOBID`) to merge outputs into a summary table.
 - Document findings in a short `README` inside `codes/lab02/` so future students can reuse the workflow.
-
-----
-
-## Next steps after the live session
-
-- Flesh out the proposed lab02 programs and scripts; push them so students clone ready-made scaffolding.
-- Integrate the SSH/slurm startup steps into the lecture notes (`lecture02.md`) for cross-reference.
-- Encourage students to run everything through the Docker cluster before accessing institutional HPC systems.
