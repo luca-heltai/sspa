@@ -91,6 +91,32 @@
       plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3]
     });
 
+    const fitSlide = slide => {
+      if (!slide || slide.classList.contains('stack')) return;
+      const maxSize = 38;
+      const minSize = 16;
+      let size = maxSize;
+      slide.style.fontSize = `${size}px`;
+      const margin = 80;
+      const availableHeight = window.innerHeight - margin;
+      while (size > minSize && slide.scrollHeight > availableHeight) {
+        size -= 1;
+        slide.style.fontSize = `${size}px`;
+      }
+    };
+
+    const fitAllSlides = () => {
+      document.querySelectorAll('.reveal .slides section').forEach(fitSlide);
+    };
+
+    Reveal.on('ready', fitAllSlides);
+    Reveal.on('slidechanged', event => {
+      fitSlide(event.currentSlide);
+    });
+
+    window.addEventListener('resize', () => {
+      fitAllSlides();
+    });
   </script>
 
 </body>
