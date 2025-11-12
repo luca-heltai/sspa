@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>An Introduction to Scientific Software Tools & Parallel Algorithms</title>
+
+  <link rel="stylesheet" href="reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="reveal.js/dist/theme/white.css" id="theme">
+
+  <link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css">
+
+  <style>
+    /* Make code blocks wider */
+    .reveal pre,
+    .reveal .code-wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+
+    .reveal pre code,
+    .reveal .code-wrapper code {
+      max-height: 600px;
+      padding: 20px;
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+
+    /* Footer styling */
+    .reveal .footer {
+      position: absolute;
+      bottom: 0px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      z-index: 1000;
+    }
+
+    .reveal .footer a {
+      color: #42affa;
+      text-decoration: none;
+    }
+
+    .reveal .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .reveal .footer img {
+      height: 30px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="reveal">
+
+    <div class="slides">
+      <section data-markdown="slides02.md" data-separator="^\n----\n$" data-separator-vertical="^\n---\n$">
+      </section>
+    </div>
+
+    <div class="footer">
+      <div>
+        <img src="logo.png" alt=""> <a href="/" target="_blank">Course Home Page</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="reveal.js/dist/reveal.js"></script>
+  <script src="reveal.js/plugin/markdown/markdown.js"></script>
+  <script src="reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="reveal.js/plugin/notes/notes.js"></script>
+  <script src="reveal.js/plugin/math/math.js"></script>
+
+  <script>
+
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3]
+    });
+
+    const fitSlide = slide => {
+      if (!slide || slide.classList.contains('stack')) return;
+      const maxSize = 38;
+      const minSize = 16;
+      let size = maxSize;
+      slide.style.fontSize = `${size}px`;
+      const margin = 80;
+      const availableHeight = window.innerHeight - margin;
+      while (size > minSize && slide.scrollHeight > availableHeight) {
+        size -= 1;
+        slide.style.fontSize = `${size}px`;
+      }
+    };
+
+    const fitAllSlides = () => {
+      document.querySelectorAll('.reveal .slides section').forEach(fitSlide);
+    };
+
+    Reveal.on('ready', fitAllSlides);
+    Reveal.on('slidechanged', event => {
+      fitSlide(event.currentSlide);
+    });
+
+    window.addEventListener('resize', () => {
+      fitAllSlides();
+    });
+  </script>
+
+</body>
+
+</html>
