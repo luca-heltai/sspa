@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
+ENV WORK=/work
+ENV SCRATCH=/scratch
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
@@ -12,10 +14,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # basic munge setup
-RUN mkdir -p /etc/munge /var/lib/munge /var/log/munge \
-    && chown -R root:root /etc/munge /var/lib/munge /var/log/munge
+# munge runtime dirs must be writable by the munge user; prep slurm config dir too
+RUN mkdir -p /etc/munge /var/lib/munge /var/log/munge /etc/slurm-llnl \
+    && chown root:munge /etc/munge \
+    && chmod 0750 /etc/munge \
+    && chown munge:munge /var/lib/munge /var/log/munge \
+    && chmod 0755 /var/lib/munge \
+    && chmod 0700 /var/log/munge \
+    && touch /var/log/munge/munged.log \
+    && chown munge:munge /var/log/munge/munged.log \
+    && chmod 0640 /var/log/munge/munged.log \
+    && chown -R slurm:slurm /etc/slurm-llnl
 
-RUN useradd -m -s /bin/bash instructor || true
+RUN useradd -m -s /bin/bash sspa || true \
+    && echo 'sspa:sspa-password' | chpasswd
+
+RUN printf 'export WORK=/work\nexport SCRATCH=/scratch\n' > /etc/profile.d/sspa_paths.sh \
+    && chmod 0644 /etc/profile.d/sspa_paths.sh
+
+RUN printf 'export SLURM_CONF=/etc/slurm-llnl/slurm.conf\n' > /etc/profile.d/slurm_conf.sh \
+    && chmod 0644 /etc/profile.d/slurm_conf.sh
+
+COPY slurm.conf /usr/local/etc/slurm.conf.template
+RUN cp /usr/local/etc/slurm.conf.template /etc/slurm-llnl/slurm.conf \
+    && chown slurm:slurm /etc/slurm-llnl/slurm.conf \
+    && chmod 0644 /etc/slurm-llnl/slurm.conf
 
 COPY docker-entrypoint-controller.sh /usr/local/bin/docker-entrypoint-controller.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint-controller.sh

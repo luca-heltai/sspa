@@ -40,6 +40,7 @@ project:
       children:
         - file: slides/slides00.md
         - file: slides/slides01.md
+        - file: slides/slides02.md
 site:
   options:
     logo: slides/logo.png

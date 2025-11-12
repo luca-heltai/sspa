@@ -5,6 +5,8 @@ clean:
 	. ./start.sh && cd jupyterbook && jupyter book clean -y
 
 serve:
+	make build && \
+	make link && \
 	. ./start.sh && cd jupyterbook/_build/html && python -m http.server 3001
 
 start:

@@ -1,6 +1,25 @@
 #!/bin/bash
 set -e
 
+# ensure runtime dirs exist (volumes may override image defaults)
+install -d -o sspa -g sspa -m 0755 /home/sspa
+install -d -o root -g munge -m 0750 /etc/munge
+install -d -o munge -g munge -m 0755 /var/lib/munge
+install -d -o munge -g munge -m 0750 /var/log/munge
+touch /var/log/munge/munged.log
+chown munge:munge /var/log/munge/munged.log
+chmod 0640 /var/log/munge/munged.log
+
+install -d -o slurm -g slurm -m 0755 /etc/slurm-llnl
+install -d -o slurm -g slurm -m 0755 /var/spool/slurm
+install -d -o slurm -g slurm -m 0755 /var/spool/slurm/state
+install -d -o slurm -g slurm -m 0755 /var/spool/slurmd
+for state_file in node_state job_state resv_state trigger_state; do
+  touch "/var/spool/slurm/${state_file}"
+  chown slurm:slurm "/var/spool/slurm/${state_file}"
+  chmod 0644 "/var/spool/slurm/${state_file}"
+done
+
 # create a minimal munge key if none exists
 if [ ! -f /etc/munge/munge.key ]; then
   dd if=/dev/urandom of=/etc/munge/munge.key bs=1 count=1024
@@ -16,26 +35,9 @@ service munge start || true
 
 # generate a basic slurm.conf if missing
 if [ ! -f /etc/slurm-llnl/slurm.conf ]; then
-  cat > /etc/slurm-llnl/slurm.conf <<'EOF'
-ControlMachine=controller
-MpiDefault=none
-ProctrackType=proctrack/pgid
-ReturnToService=2
-SlurmUser=slurm
-StateSaveLocation=/var/spool/slurm
-SlurmdSpoolDir=/var/spool/slurm
-SlurmctldPidFile=/var/run/slurmctld.pid
-SlurmdPidFile=/var/run/slurmd.pid
-SlurmctldPort=6817
-SlurmdPort=6818
-AuthType=auth/munge
-SchedulerType=sched/backfill
-SelectType=select/cons_res
-SelectTypeParameters=CR_Core
-
-NodeName=worker[1-2] CPUs=2 State=UNKNOWN
-PartitionName=debug Nodes=ALL Default=YES MaxTime=INFINITE State=UP
-EOF
+  cp /usr/local/etc/slurm.conf.template /etc/slurm-llnl/slurm.conf
+  chown slurm:slurm /etc/slurm-llnl/slurm.conf
+  chmod 0644 /etc/slurm-llnl/slurm.conf
 fi
 
 # start slurm controller

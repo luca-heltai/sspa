@@ -9,3 +9,15 @@ Objectives
 Content summary
 
 Simulate cluster usage (Docker-based environment). Explain resource requests (CPUs, memory, GPUs), job arrays and dependencies. Hands-on: write a Slurm job script to run a sample program and monitor it through the queue.
+
+<!-- FOOTER START -->
+<iframe src="/slideshow/slides02.html" width="100%" height="800px" style="border: none;"></iframe>
+
+---
+
+```{admonition} 🎬 View Slides
+:class: tip
+
+**[Open slides in full screen](/slideshow/slides02.html)** for the best viewing experience.
+```
+<!-- FOOTER END -->

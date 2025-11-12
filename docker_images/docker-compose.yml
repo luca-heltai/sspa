@@ -9,6 +9,10 @@ services:
       - sspa_net
     volumes:
       - ./slurm-state:/var/spool/slurm
+      - ./munge:/etc/munge
+      - ./work:/work
+      - ./scratch:/scratch
+      - ./sspa-home:/home/sspa
     ports:
       - "6817:6817"
       - "6818:6818"
@@ -19,16 +23,28 @@ services:
       context: .
       dockerfile: slurm-worker.Dockerfile
     container_name: sspa_slurm_worker1
+    hostname: worker1
     networks:
       - sspa_net
+    volumes:
+      - ./munge:/etc/munge
+      - ./work:/work
+      - ./scratch:/scratch
+      - ./sspa-home:/home/sspa
 
   worker2:
     build:
       context: .
       dockerfile: slurm-worker.Dockerfile
     container_name: sspa_slurm_worker2
+    hostname: worker2
     networks:
       - sspa_net
+    volumes:
+      - ./munge:/etc/munge
+      - ./work:/work
+      - ./scratch:/scratch
+      - ./sspa-home:/home/sspa
 
   jupyter:
     build:
