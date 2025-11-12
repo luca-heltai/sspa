@@ -41,6 +41,10 @@ project:
         - file: slides/slides00.md
         - file: slides/slides01.md
         - file: slides/slides02.md
+    - title: Exercises
+      children:
+        - file: exercises/lecture01.md
+        - file: exercises/lecture02.md
 site:
   options:
     logo: slides/logo.png
