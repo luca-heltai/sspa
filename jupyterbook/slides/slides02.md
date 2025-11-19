@@ -1,4 +1,4 @@
-# Lecture 2 — HPC Cluster Usage & Slurm
+# HPC Cluster Usage & Slurm
 
 ----
 

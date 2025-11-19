@@ -15,10 +15,11 @@ install -d -o slurm -g slurm -m 0755 /var/spool/slurm
 install -d -o slurm -g slurm -m 0755 /var/spool/slurm/state
 install -d -o slurm -g slurm -m 0755 /var/spool/slurmd
 install -d -o slurm -g slurm -m 0755 /var/log/slurm
-touched_files="/var/spool/slurm/node_state /var/spool/slurm/job_state /var/spool/slurm/resv_state /var/spool/slurm/trigger_state"
-for f in $touched_files; do
-  rm -f "$f" "$f.old"
-done
+install -d -o slurm -g slurm -m 0755 /slurm-config
+
+# wipe stale state artifacts from bind-mounted volume (files, dirs, sockets, etc.)
+find /var/spool/slurm -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+
 touch /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
 chown slurm:slurm /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
 chmod 0644 /var/log/slurm/slurm_jobacct.log /var/log/slurm/accounting
@@ -47,6 +48,28 @@ if [ ! -f /etc/slurm-llnl/slurm.conf ]; then
   chown slurm:slurm /etc/slurm-llnl/slurm.conf
   chmod 0644 /etc/slurm-llnl/slurm.conf
 fi
+
+IFS=',' read -ra slurm_nodes <<< "${SLURM_NODE_LIST:-worker1,worker2}"
+node_files=()
+for raw_node in "${slurm_nodes[@]}"; do
+  node="$(echo "$raw_node" | tr -d '[:space:]')"
+  [ -z "$node" ] && continue
+  node_file="/slurm-config/${node}.conf"
+  echo "Waiting for node description at ${node_file}"
+  until [ -s "$node_file" ]; do
+    sleep 1
+  done
+  node_files+=("$node_file")
+done
+
+nodes_tmp="$(mktemp)"
+for node_file in "${node_files[@]}"; do
+  cat "$node_file" >> "$nodes_tmp"
+  printf '\n' >> "$nodes_tmp"
+done
+mv "$nodes_tmp" /slurm-config/nodes.conf
+chown slurm:slurm /slurm-config/nodes.conf
+chmod 0644 /slurm-config/nodes.conf
 
 # start slurm controller
 /usr/sbin/slurmctld -D -f /etc/slurm-llnl/slurm.conf &
