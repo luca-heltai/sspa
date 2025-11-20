@@ -34,6 +34,10 @@ RUN cp /usr/local/etc/slurm.conf.template /etc/slurm-llnl/slurm.conf \
     && chown slurm:slurm /etc/slurm-llnl/slurm.conf \
     && chmod 0644 /etc/slurm-llnl/slurm.conf
 
+COPY cgroup.conf /etc/slurm-llnl/cgroup.conf
+RUN chown slurm:slurm /etc/slurm-llnl/cgroup.conf \
+    && chmod 0644 /etc/slurm-llnl/cgroup.conf
+
 COPY docker-entrypoint-worker.sh /usr/local/bin/docker-entrypoint-worker.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint-worker.sh
 
