@@ -22,7 +22,16 @@ fi
 
 node_name="$(hostname -s)"
 node_conf_tmp="$(mktemp)"
-/usr/sbin/slurmd -C | awk '/^NodeName=/{print $0 " State=UNKNOWN"}' > "$node_conf_tmp"
+SLURM_NODE_CPUS="${SLURM_NODE_CPUS:-4}"
+SLURM_NODE_REAL_MEMORY_MB="${SLURM_NODE_REAL_MEMORY_MB:-4096}"
+SLURM_NODE_SOCKETS="${SLURM_NODE_SOCKETS:-1}"
+SLURM_NODE_THREADS_PER_CORE="${SLURM_NODE_THREADS_PER_CORE:-1}"
+SLURM_NODE_CORES_PER_SOCKET="${SLURM_NODE_CORES_PER_SOCKET:-$SLURM_NODE_CPUS}"
+SLURM_NODE_STATE="${SLURM_NODE_STATE:-UNKNOWN}"
+
+cat > "$node_conf_tmp" <<EOF
+NodeName=${node_name} CPUs=${SLURM_NODE_CPUS} Sockets=${SLURM_NODE_SOCKETS} CoresPerSocket=${SLURM_NODE_CORES_PER_SOCKET} ThreadsPerCore=${SLURM_NODE_THREADS_PER_CORE} RealMemory=${SLURM_NODE_REAL_MEMORY_MB} State=${SLURM_NODE_STATE}
+EOF
 mv "$node_conf_tmp" "/slurm-config/${node_name}.conf"
 chown slurm:slurm "/slurm-config/${node_name}.conf"
 chmod 0644 "/slurm-config/${node_name}.conf"

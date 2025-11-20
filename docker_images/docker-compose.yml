@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: slurm-controller.Dockerfile
     container_name: sspa_slurm_controller
+    cpus: 4
+    mem_limit: 4g
     hostname: controller
     networks:
       - sspa_net
@@ -26,9 +28,16 @@ services:
       context: .
       dockerfile: slurm-worker.Dockerfile
     container_name: sspa_slurm_worker1
+    cpus: 4
+    mem_limit: 4g
     hostname: worker1
     networks:
       - sspa_net
+    environment:
+      - SLURM_NODE_CPUS=4
+      - SLURM_NODE_REAL_MEMORY_MB=4096
+      - SLURM_NODE_SOCKETS=1
+      - SLURM_NODE_THREADS_PER_CORE=1
     volumes:
       - munge-key:/etc/munge
       - slurm-config:/slurm-config
@@ -41,9 +50,16 @@ services:
       context: .
       dockerfile: slurm-worker.Dockerfile
     container_name: sspa_slurm_worker2
+    cpus: 4
+    mem_limit: 4g
     hostname: worker2
     networks:
       - sspa_net
+    environment:
+      - SLURM_NODE_CPUS=4
+      - SLURM_NODE_REAL_MEMORY_MB=4096
+      - SLURM_NODE_SOCKETS=1
+      - SLURM_NODE_THREADS_PER_CORE=1
     volumes:
       - munge-key:/etc/munge
       - slurm-config:/slurm-config
