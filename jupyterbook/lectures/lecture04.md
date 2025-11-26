@@ -9,3 +9,15 @@ Objectives
 Content summary
 
 Simulate a small-team workflow: fork/clone, push, open PRs, and review changes. Practice resolving merge conflicts and discuss branching strategies and protections.
+
+<!-- FOOTER START -->
+<iframe src="/slideshow/slides04.html" width="100%" height="800px" style="border: none;"></iframe>
+
+---
+
+```{admonition} 🎬 View Slides
+:class: tip
+
+**[Open slides in full screen](/slideshow/slides04.html)** for the best viewing experience.
+```
+<!-- FOOTER END -->

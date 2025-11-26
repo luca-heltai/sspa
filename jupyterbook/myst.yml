@@ -42,11 +42,13 @@ project:
         - file: slides/slides01.md
         - file: slides/slides02.md
         - file: slides/slides03.md
+        - file: slides/slides04.md
     - title: Exercises
       children:
         - file: exercises/lecture01.md
         - file: exercises/lecture02.md
         - file: exercises/lecture03.md
+        - file: exercises/lecture04.md
 site:
   options:
     logo: slides/logo.png
