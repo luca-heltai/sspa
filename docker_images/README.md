@@ -14,6 +14,10 @@ Usage:
 
    docker compose exec controller bash
 
+Additional tooling:
+
+- `sspa/docs` image (built by `build_images.sh`) includes Doxygen, Sphinx, MyST, and Breathe for automated documentation labs.
+
 Notes:
 
 - These images are minimal and designed for teaching/demo purposes only.

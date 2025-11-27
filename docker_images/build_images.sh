@@ -11,4 +11,7 @@ docker build -t sspa/slurm-worker -f slurm-worker.Dockerfile .
 echo "Building jupyter image..."
 docker build -t sspa/jupyter -f jupyter.Dockerfile .
 
+echo "Building docs toolchain image..."
+docker build -t sspa/docs -f docs.Dockerfile .
+
 echo "All images built. Use 'docker compose up -d' to start the mini-cluster."
