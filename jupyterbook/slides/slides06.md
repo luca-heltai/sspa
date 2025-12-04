@@ -105,6 +105,10 @@ int main(int argc, char **argv)
 
 ## Red–green–refactor loop
 
+![Red–green–refactor loop (Martin Fowler card)](https://martinfowler.com/bliki/images/test-driven-development/card.png)
+
+---
+
 - Red: write a failing test that expresses intent; run to see it fail.
 - Green: implement the smallest change to pass; no heroic refactors yet.
 - Refactor: clean code/tests with safety net; keep tests green after each small step.
@@ -119,6 +123,9 @@ int main(int argc, char **argv)
   `python/` with `tests/` and `conftest.py`.
 - C++ one-shot build:  
   `g++ -std=c++17 main.cpp tests/test_vwce.cpp -lgtest -lgtest_main -pthread -o test_vwce && ./test_vwce`
+
+---
+
 - Python: `pytest -q python/tests` (add `-vv` for verbose).
 - Make tests hermetic: bundle tiny CSV fixtures in the repo; avoid using the full 2024 dataset unless needed.
 
