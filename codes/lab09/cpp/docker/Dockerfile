@@ -2,6 +2,7 @@ FROM ubuntu:22.04
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        ca-certificates \
         build-essential \
         cmake \
         git \
