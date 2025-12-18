@@ -10,7 +10,5 @@ RUN apt-get update \
 WORKDIR /work
 COPY . .
 
-RUN cmake -S . -B build \
-    && cmake --build build
-
-CMD ["ctest", "--test-dir", "build", "--output-on-failure"]
+# Image provides the build environment only; CI builds/tests the project.
+CMD ["bash"]

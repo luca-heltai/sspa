@@ -7,15 +7,11 @@ permissions:
   contents: read
   packages: read
 
-env:
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
-  IMAGE_TAG: latest-python
-
 jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      image: ghcr.io/${{ github.repository_owner }}/sspa:latest-python
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}

@@ -7,24 +7,18 @@ permissions:
   contents: read
   packages: read
 
-env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/sspa
-  IMAGE_TAG: latest-cpp
-
 jobs:
   test:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/sspa:latest-cpp
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure, build, and test in registry image
         run: |
-          docker run --rm \
-            -v ${{ github.workspace }}/codes/lab09/cpp:/work \
-            -w /work \
-            ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
-            sh -lc "cmake -S . -B build && cmake --build build && ctest --test-dir build --output-on-failure"
+          cmake -S codes/lab09/cpp -B build
+          cmake --build build
+          ctest --test-dir build --output-on-failure

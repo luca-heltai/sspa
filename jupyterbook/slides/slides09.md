@@ -6,7 +6,7 @@
 
 - Rebuild the full toolchain from scratch, end-to-end
 - Three example stacks: LaTeX, Python+pytest, C++/googletest
-- Three CI workflows per stack: build/push, local tests, registry tests
+- CI workflows per stack: build/push + tests inside GHCR images
 - Emphasize reproducibility and automation
 
 ----
@@ -38,8 +38,7 @@ codes/lab09/
 1. Minimal code + tests
 2. Docker image that can run the tests
 3. GitHub Actions workflow to build/push the image
-4. GitHub Actions workflow to run tests/compile
-5. GitHub Actions workflow to run from GHCR
+4. GitHub Actions workflow to run tests/compile in `container.image`
 
 ----
 
@@ -51,7 +50,7 @@ codes/lab09/
 
 ```bash
 docker build -t ghcr.io/luca-heltai/sspa:latest-python -f docker/Dockerfile .
-docker run --rm ghcr.io/luca-heltai/sspa:latest-python pytest -q
+docker push ghcr.io/luca-heltai/sspa:latest-python
 ```
 
 ----
@@ -78,8 +77,7 @@ ctest --test-dir build --output-on-failure
 
 ```bash
 docker build -t ghcr.io/luca-heltai/sspa:latest-latex -f docker/Dockerfile .
-docker run --rm -v "$PWD":/work -w /work ghcr.io/luca-heltai/sspa:latest-latex \
-  latexmk -pdf -interaction=nonstopmode main.tex
+docker push ghcr.io/luca-heltai/sspa:latest-latex
 ```
 
 ----
@@ -99,30 +97,35 @@ on: { workflow_dispatch: {} }
 
 ## GitHub Actions: run tests
 
-- Build image, then run containerized tests
+- Run tests inside the job container image
 - C++ uses `ctest`, Python uses `pytest`, LaTeX compiles
 - LaTeX workflow uploads the generated PDF
 
 ```yaml
-- name: Run pytest
-  run: docker run --rm sspa-lab09-python
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/luca-heltai/sspa:latest-python
+    steps:
+      - uses: actions/checkout@v4
+      - run: pytest -q
 ```
 
 ----
 
 ## GitHub Actions: test from registry
 
-- Pull tagged images from GHCR
-- Mount the repo and run tests inside the container
+- Use `container.image` for GHCR-hosted images
+- Repository workspace is mounted automatically
 - Matches CI environment with local code
 
 ```yaml
-- name: Run pytest in registry image
-  run: |
-    docker run --rm \\
-      -v ${{ github.workspace }}/codes/lab09/python:/work \\
-      -w /work \\
-      ghcr.io/luca-heltai/sspa:latest-python pytest -q
+container:
+  image: ghcr.io/luca-heltai/sspa:latest-python
+steps:
+  - uses: actions/checkout@v4
+  - run: pytest -q
 ```
 
 ----
