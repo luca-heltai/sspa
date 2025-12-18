@@ -9,15 +9,17 @@ target_include_directories(stats PUBLIC include)
 
 enable_testing()
 
+set(GTEST_DOWNLOAD_EXTRACT_TIMESTAMP "")
 if(POLICY CMP0135)
     cmake_policy(SET CMP0135 NEW)
+    set(GTEST_DOWNLOAD_EXTRACT_TIMESTAMP DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 endif()
 
 include(FetchContent)
 FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
-    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    ${GTEST_DOWNLOAD_EXTRACT_TIMESTAMP}
 )
 FetchContent_MakeAvailable(googletest)
 
