@@ -1,11 +1,30 @@
-# Lecture 9 — Parallel Computing Concepts (3h)
+# Lecture 9 — Recap: Reproducible Dev Environments (3h)
 
 Objectives
 
-- Define speedup and efficiency; strong vs weak scaling
-- Apply Amdahl’s Law and Gustafson’s Law to examples
-- Interpret timing data and identify scaling bottlenecks
+- Summarize the course tooling: containers, CI, and testing workflows
+- Build three example Docker images (LaTeX, Python+pytest, C++/googletest)
+- Implement six GitHub Actions workflows: three to build images, three to run tests
+- Compile a LaTeX document and publish artifacts in CI
 
 Content summary
 
-Theory of speedup: definitions and worked examples. Discuss profiling and where serial fractions arise. Numerical examples illustrating Amdahl and Gustafson interpretations.
+We revisit all major themes by assembling three minimal projects under `codes/lab09`:
+
+- `python`: NumPy-based utilities with pytest tests
+- `cpp`: a CMake project with googletest and a sample test suite
+- `latex`: a minimal document compiled in CI with artifacts uploaded
+
+Each project includes a Docker image recipe plus GitHub Actions workflows to build the image and run the corresponding tests.
+
+<!-- FOOTER START -->
+<iframe src="/slideshow/slides09.html" width="100%" height="800px" style="border: none;"></iframe>
+
+---
+
+```{admonition} 🎬 View Slides
+:class: tip
+
+**[Open slides in full screen](/slideshow/slides09.html)** for the best viewing experience.
+```
+<!-- FOOTER END -->

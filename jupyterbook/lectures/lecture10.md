@@ -1,11 +1,11 @@
-# Lecture 10 — Parallel Performance Lab & Wrap-up (3h)
+# Lecture 10 — Parallel Computing Concepts (3h)
 
 Objectives
 
-- Run practical parallel experiments (e.g., Monte Carlo π)
-- Measure runtimes, compute speedup and efficiency
-- Prepare final mini-project deliverables and next steps
+- Define speedup and efficiency; strong vs weak scaling
+- Apply Amdahl’s Law and Gustafson’s Law to examples
+- Interpret timing data and identify scaling bottlenecks
 
 Content summary
 
-Hands-on lab: serial and parallel implementations (Python multiprocessing, optional C++/OpenMP). Collect timings for 1,2,4,... cores, tabulate speedup, and analyze results vs theoretical expectations. Course summary and integration of tools.
+Theory of speedup: definitions and worked examples. Discuss profiling and where serial fractions arise. Numerical examples illustrating Amdahl and Gustafson interpretations.

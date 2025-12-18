@@ -36,6 +36,7 @@ project:
         - file: lectures/lecture08.md
         - file: lectures/lecture09.md
         - file: lectures/lecture10.md
+        - file: lectures/lecture11.md
     - title: Slides content
       children:
         - file: slides/slides00.md
@@ -47,6 +48,7 @@ project:
         - file: slides/slides06.md
         - file: slides/slides07.md
         - file: slides/slides08.md
+        - file: slides/slides09.md
     - title: Exercises
       children:
         - file: exercises/lecture01.md
