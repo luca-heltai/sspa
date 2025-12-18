@@ -8,7 +8,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/sspa
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
   IMAGE_TAG: latest-python
 
 jobs:
