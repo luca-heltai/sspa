@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lab09-latex-pdf
-          path: codes/lab09/latex/main.pdf
+          path: ./main.pdf
