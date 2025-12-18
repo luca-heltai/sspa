@@ -49,8 +49,8 @@ codes/lab09/
 - Docker image installs `numpy` + `pytest` and runs tests
 
 ```bash
-docker build -t ghcr.io/luca-heltai/sspa:latest-python -f docker/Dockerfile .
-docker push ghcr.io/luca-heltai/sspa:latest-python
+docker build -t ghcr.io/<owner>/<repo>:latest-python -f docker/Dockerfile .
+docker push ghcr.io/<owner>/<repo>:latest-python
 ```
 
 ----
@@ -76,8 +76,8 @@ ctest --test-dir build --output-on-failure
 - Workflow compiles the PDF and uploads it as an artifact
 
 ```bash
-docker build -t ghcr.io/luca-heltai/sspa:latest-latex -f docker/Dockerfile .
-docker push ghcr.io/luca-heltai/sspa:latest-latex
+docker build -t ghcr.io/<owner>/<repo>:latest-latex -f docker/Dockerfile .
+docker push ghcr.io/<owner>/<repo>:latest-latex
 ```
 
 ----
@@ -106,26 +106,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/luca-heltai/sspa:latest-python
+      image: ghcr.io/${{ github.repository }}:latest-python
     steps:
       - uses: actions/checkout@v4
       - run: pytest -q
-```
-
-----
-
-## GitHub Actions: test from registry
-
-- Use `container.image` for GHCR-hosted images
-- Repository workspace is mounted automatically
-- Matches CI environment with local code
-
-```yaml
-container:
-  image: ghcr.io/luca-heltai/sspa:latest-python
-steps:
-  - uses: actions/checkout@v4
-  - run: pytest -q
 ```
 
 ----
