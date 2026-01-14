@@ -68,6 +68,9 @@
     <loc>http://localhost:3000/slides/slides09</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/slides/slides10</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/exercises/lecture01</loc>
   </url>
   <url>
@@ -90,5 +93,8 @@
   </url>
   <url>
     <loc>http://localhost:3000/exercises/lecture08</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/exercises/lecture10</loc>
   </url>
 </urlset>
