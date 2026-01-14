@@ -9,3 +9,15 @@ Objectives
 Content summary
 
 Theory of speedup: definitions and worked examples. Discuss profiling and where serial fractions arise. Numerical examples illustrating Amdahl and Gustafson interpretations.
+
+<!-- FOOTER START -->
+<iframe src="/slideshow/slides10.html" width="100%" height="800px" style="border: none;"></iframe>
+
+---
+
+```{admonition} 🎬 View Slides
+:class: tip
+
+**[Open slides in full screen](/slideshow/slides10.html)** for the best viewing experience.
+```
+<!-- FOOTER END -->

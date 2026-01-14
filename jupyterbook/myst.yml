@@ -49,6 +49,7 @@ project:
         - file: slides/slides07.md
         - file: slides/slides08.md
         - file: slides/slides09.md
+        - file: slides/slides10.md
     - title: Exercises
       children:
         - file: exercises/lecture01.md
@@ -59,6 +60,7 @@ project:
         - file: exercises/lecture06.md
         - file: exercises/lecture07.md
         - file: exercises/lecture08.md
+        - file: exercises/lecture10.md
 site:
   options:
     logo: slides/logo.png
